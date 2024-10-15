@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 
-if os.path.exist('env.py'):
+if os.path.exists('env.py'):
     import env
+
 
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
@@ -36,7 +37,7 @@ SECRET_KEY = 'django-insecure-fi@zr&3(upy*w*c0h=vy-9x#de6t3ahj6z#2f1h-4*=#2+2ljs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net']
 
 
 # Application definition
@@ -47,9 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage'
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'profil_app',
 ]
 
 MIDDLEWARE = [
