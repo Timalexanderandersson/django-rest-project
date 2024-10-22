@@ -18,6 +18,10 @@ if os.path.exists('env.py'):
     import env
 
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 if 'DEV' in os.environ:
      DATABASES = {
          'default': {
@@ -62,9 +66,6 @@ REST_AUTH_SERIALIZERS = {
 }
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -73,14 +74,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net', 'https://django-rest-project-test-be1f99b97fc0.herokuapp.com/']
+ALLOWED_HOSTS = ['8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net', 'django-rest-project-test-be1f99b97fc0.herokuapp.com']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net',
+    'https://8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net'
+    ,'https://django-rest-project-test-be1f99b97fc0.herokuapp.com'
 ]
 
 # Application definition
@@ -138,7 +139,7 @@ else:
 CORS_ALLOW_CREDENTIALS = True
 
 JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKE = 'my-refresh-token'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 ROOT_URLCONF = 'cool_prod.urls'
