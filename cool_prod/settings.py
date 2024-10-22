@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import re
 
 if os.path.exists('env.py'):
     import env
@@ -79,12 +80,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net', 'django-rest-project-test-be1f99b97fc0.herokuapp.com']
+ALLOWED_HOSTS = ['8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net', os.environ.get('ALLOWED_HOST')]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-timalexande-djangorestp-lcchcnedohx.ws.codeinstitute-ide.net'
     ,'https://django-rest-project-test-be1f99b97fc0.herokuapp.com'
 ]
+
 
 # Application definition
 
@@ -135,9 +137,16 @@ if 'CLIENT_ORIGIN' in os.environ:
          os.environ.get('CLIENT_ORIGIN')
      ]
 else:
-     CORS_ALLOWED_ORIGIN_REGEXES = [
-         r"^https://.*\.gitpod\.io$",
+    if 'CLIENT_ORIGIN_DEV' in os.environ:
+        extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+        CORS_ALLOWED_ORIGIN_REGEXES = [
+            rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]     
+    else:
+        CORS_ALLOWED_ORIGIN_REGEXES = [
+            r"^https://.*\.gitpod\.io$",
      ]
+
 CORS_ALLOW_CREDENTIALS = True
 
 JWT_AUTH_COOKIE = 'my-app-auth'
