@@ -100,8 +100,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    'django_filters',
     'rest_framework',
+    'django_filters',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'django.contrib.sites',
@@ -137,9 +137,12 @@ MIDDLEWARE = [
 if "CLIENT_ORIGIN" in os.environ:
     CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
 
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://.*\.codeinstitute-ide\.net$"
-]
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^https://.*\.codeinstitute-ide\.net$"
+# ]
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    CORS_ALLOWED_ORIGIN_REGEXES = [r"^https://.*\.codeinstitute-ide\.net$",]
 
 CORS_ALLOW_CREDENTIALS = True
 
